@@ -150,19 +150,13 @@ public class PlayerController : MonoBehaviour
         mainCamera.transform.parent = null;
         deathUIPanel.gameObject.SetActive(true);
         rigidbodyPlayer.constraints = RigidbodyConstraints2D.FreezePosition;
-        rigidbodyPlayer.GetComponent<BoxCollider2D>().isTrigger = true; // Turning off the player collision when dead!
-        //ReloadLevel();				
+        rigidbodyPlayer.GetComponent<BoxCollider2D>().isTrigger = true; // Turning off the player collision when dead!				
     }
 
     public void PlayDeathAnimation()
     {
         animator.SetTrigger("Die");
     }
-
-    // private void ReloadLevel()
-    // {
-    //     SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    // }
 
     public void HandleHealthUI()
     {

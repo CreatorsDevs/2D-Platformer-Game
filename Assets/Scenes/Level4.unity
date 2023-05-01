@@ -2882,10 +2882,15 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7961606464745627406, guid: 31f4ba0b1bc723c46b42c9132e27d8ec,
+        type: 3}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8092221875081359249, guid: 31f4ba0b1bc723c46b42c9132e27d8ec,
         type: 3}
       propertyPath: jumpHeight
-      value: 0.2
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 8092221875081359249, guid: 31f4ba0b1bc723c46b42c9132e27d8ec,
         type: 3}
@@ -4220,7 +4225,7 @@ GameObject:
   - component: {fileID: 2036934975}
   m_Layer: 0
   m_Name: LevelStart
-  m_TagString: LevelEnd
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -4277,6 +4282,7 @@ GameObject:
   - component: {fileID: 2090584845}
   - component: {fileID: 2090584844}
   - component: {fileID: 2090584846}
+  - component: {fileID: 2090584847}
   m_Layer: 0
   m_Name: LevelEnd
   m_TagString: LevelEnd
@@ -4332,8 +4338,21 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2090584843}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a180c4810e59c2d4ebdf56ff14b7f1a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2090584847
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2090584843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 777e29584586d9e45a574fdabaef09f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextSceneLoad: 0
