@@ -6,6 +6,7 @@ using UnityEngine.SceneManagement;
 public class MoveToNextLevel : MonoBehaviour
 {
     public int nextSceneLoad;
+    public GameObject moveToNextLevelUI;
     // Start is called before the first frame update
     void Start()
     {
@@ -13,8 +14,10 @@ public class MoveToNextLevel : MonoBehaviour
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("Triggered");
         if(other.gameObject.tag == "Player")
         {
+            Debug.Log("Triggered with Player");
             if(SceneManager.GetActiveScene().buildIndex == 6)
             {
                 Debug.Log("You Won The Game!!!");
@@ -22,7 +25,8 @@ public class MoveToNextLevel : MonoBehaviour
             else
             {
                 //Move to next level
-                SceneManager.LoadScene(nextSceneLoad);
+                moveToNextLevelUI.gameObject.SetActive(true);
+                Debug.Log("Trigger entered");
 
                 //Setting Int for Index
                 if(nextSceneLoad > PlayerPrefs.GetInt("leveAt"))
@@ -31,5 +35,10 @@ public class MoveToNextLevel : MonoBehaviour
                 }
             }            
         }
+    }
+
+    public void LoadNextScene(){
+        SceneManager.LoadScene(nextSceneLoad);
+        LevelSelection.levelManagerInstance.LevelName();
     }
 }
