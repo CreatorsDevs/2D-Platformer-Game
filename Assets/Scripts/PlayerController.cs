@@ -5,12 +5,20 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public Animator animator;
+    public float speed;
+    public float jumpForce;
+    public bool isGrounded;
     public Vector2 crouchedColliderScale = new Vector2(0.9171886f, 1.328003f);
     public Vector2 crouchedColliderOffset = new Vector2(-0.11f, 0.59f);
     private BoxCollider2D _collider;
     private Vector2 _standingColliderScale, _standingColliderOffset;
     private bool _isJumping = false;
+    private Rigidbody2D rigidbodyPlayer;
 
+    private void Awake()
+    {
+        rigidbodyPlayer= gameObject.GetComponent<Rigidbody2D>();
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -22,10 +30,15 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float speed = Input.GetAxisRaw("Horizontal");
+        float horizontal = Input.GetAxisRaw("Horizontal");
         float vertical = Input.GetAxisRaw("Vertical");
         bool crouch = Input.GetKey(KeyCode.LeftControl);
 
+        PlayMovementAnimation(horizontal,vertical,crouch);
+        PlayerMovementFunction(horizontal,vertical,crouch);        
+    }
+
+    private void PlayMovementAnimation(float horizontal, float vertical, bool crouch){
         if(crouch)
         {
             _collider.size = crouchedColliderScale;
@@ -38,16 +51,15 @@ public class PlayerController : MonoBehaviour
         }
 
         animator.SetBool("Crouch", crouch);
-
-        animator.SetFloat("Speed", Mathf.Abs(speed));
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
         animator.SetFloat("Vertical", Mathf.Abs(vertical));
 
         Vector3 scale = transform.localScale;
 
-        if (speed < 0){
+        if (horizontal < 0){
             scale.x = -1 * Mathf.Abs(scale.x);
         }
-        else if(speed > 0){
+        else if(horizontal > 0){
             scale.x = Mathf.Abs(scale.x);
         }
         transform.localScale = scale;
@@ -61,5 +73,34 @@ public class PlayerController : MonoBehaviour
 
         if(_isJumping)
             _isJumping = !animator.GetCurrentAnimatorStateInfo(0).IsName("Player_Jump");
+    }
+
+    private void PlayerMovementFunction(float horizontal, float vertical, bool crouch){
+        // Horizontal Movement
+        Vector3 position = transform.position;
+        position.x += horizontal * speed * Time.deltaTime;
+        transform.position = position;
+        // Jump Movement
+        if (vertical > 0  && isGrounded)
+        {
+            animator.SetTrigger("Jump");
+            rigidbodyPlayer.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+        }
+    }
+
+    private void OnCollisionStay2D(Collision2D other)
+    {
+        if(other.transform.tag == "platform")
+        {
+            isGrounded = true;
+        } 
+    }
+
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        if (other.transform.tag == "platform")
+        {
+            isGrounded = false;
+        }
     }
 }
