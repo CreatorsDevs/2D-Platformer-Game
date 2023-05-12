@@ -33,7 +33,7 @@ public class EnemyController : MonoBehaviour
 
         if(hit)
         {
-            Debug.Log(hit.collider.name);
+            //Debug.Log(hit.collider.name);
             transform.localScale = new Vector3(-1 * transform.localScale.x, transform.localScale.y, transform.localScale.z);
             movingRight = movingRight * -1;
         }

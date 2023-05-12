@@ -6,18 +6,12 @@ using UnityEngine.UI;
 
 public class GameOverController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
+    [SerializeField] private Button restartButton;
+    [SerializeField] private Button menuButton;
+    private void Awake() {
+        restartButton.onClick.AddListener(ReloadLevel);
+        menuButton.onClick.AddListener(ReturnToMenu);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     public void ReloadLevel()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);

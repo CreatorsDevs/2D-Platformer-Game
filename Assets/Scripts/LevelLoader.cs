@@ -1,18 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
+[RequireComponent(typeof(Button))]
 public class LevelLoader : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    private Button button;
+    public string LevelName;
+
+    private void Awake()
     {
-        
+        button = GetComponent<Button>();
+        button.onClick.AddListener(onClick);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void onClick()
     {
-        
+        LevelStatus levelStatus = LevelManager.Instance.GetLevelStatus(LevelName);
+
+        switch(levelStatus)
+        {
+            case LevelStatus.Locked:
+                Debug.Log("This Level is Locked");
+                break;
+            case LevelStatus.Unlocked:
+                Debug.Log("This Level is Unlocked");
+                SceneManager.LoadScene(LevelName);
+                break;
+            case LevelStatus.Completed:
+                Debug.Log("This Level is Completed");
+                SceneManager.LoadScene(LevelName);
+                break;
+        }
     }
 }

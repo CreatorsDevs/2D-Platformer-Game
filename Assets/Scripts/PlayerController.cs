@@ -23,16 +23,14 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D _collider;
     private Vector2 _standingColliderScale, _standingColliderOffset;
     private bool _isJumping = false;
-    private Rigidbody2D rigidbodyPlayer;
-    
+    private Rigidbody2D rigidbodyPlayer;   
     private bool isdead;
     
-
     private void Awake()
     {
         rigidbodyPlayer= gameObject.GetComponent<Rigidbody2D>();
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         _collider = GetComponent<BoxCollider2D>();
@@ -40,7 +38,6 @@ public class PlayerController : MonoBehaviour
         _standingColliderOffset = _collider.offset;
     }
 
-    // Update is called once per frame
     void Update()
     {
         float horizontal = Input.GetAxisRaw("Horizontal");
@@ -86,7 +83,7 @@ public class PlayerController : MonoBehaviour
 
         if (vertical > 0 && !_isJumping)
         {
-            Debug.Log(vertical);
+            //Debug.Log(vertical);
             animator.SetTrigger("Jump");
             _isJumping = true;
         }
@@ -150,7 +147,8 @@ public class PlayerController : MonoBehaviour
         mainCamera.transform.parent = null;
         deathUIPanel.gameObject.SetActive(true);
         rigidbodyPlayer.constraints = RigidbodyConstraints2D.FreezePosition;
-        rigidbodyPlayer.GetComponent<BoxCollider2D>().isTrigger = true; // Turning off the player collision when dead!				
+        rigidbodyPlayer.GetComponent<BoxCollider2D>().isTrigger = true; // Turning off the player collision when dead!
+        this.enabled = false;				
     }
 
     public void PlayDeathAnimation()

@@ -14,18 +14,6 @@ public class LobbyController : MonoBehaviour
         playButton.onClick.AddListener(SelectLevel);
         quitButton.onClick.AddListener(QuitGame);
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
     private void SelectLevel(){
         levelSelectionPopUp.SetActive(true);
     }
