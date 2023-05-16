@@ -52,6 +52,13 @@ public class PlayerController : MonoBehaviour
         if(transform.position.y < -20f){
             transform.position = levelStart.transform.position;
             Debug.Log("Level Restarted!");
+        }
+
+        if((Input.GetKeyDown(KeyCode.LeftArrow)) ||(Input.GetKeyDown(KeyCode.RightArrow))){
+            FindObjectOfType<AudioManager>().Play(ConstantString.playerRunSound);
+        }
+        if(Input.GetKeyDown(KeyCode.UpArrow)){
+            FindObjectOfType<AudioManager>().Play(ConstantString.playerJumpSound);
         }        
     }
 
@@ -128,6 +135,7 @@ public class PlayerController : MonoBehaviour
 
     public void DecreaseHealth()
     {
+        FindObjectOfType<AudioManager>().Play(ConstantString.playerDeathSound);
         health--;
                 HandleHealthUI();
         if(health <= 0)
