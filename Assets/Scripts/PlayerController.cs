@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private bool _isJumping = false;
     private Rigidbody2D rigidbodyPlayer;   
     private bool isdead;
+    [SerializeField] private ParticleSystem playerDeathParticleEffect = default;
     
     private void Awake()
     {
@@ -135,22 +136,25 @@ public class PlayerController : MonoBehaviour
 
     public void DecreaseHealth()
     {
-        FindObjectOfType<AudioManager>().Play(ConstantString.playerDeathSound);
         health--;
                 HandleHealthUI();
         if(health <= 0)
             {
+                AudioManager.instance.Play(ConstantString.playerDeathSound);
                 PlayDeathAnimation();
                 PlayerDeath();            
             } 
         else
             {
                 transform.position = levelStart.transform.position;
+                AudioManager.instance.Play(ConstantString.playerRespawnSound);
             }
     }
 
     public void PlayerDeath()
     {
+        Instantiate(playerDeathParticleEffect,transform.position,playerDeathParticleEffect.transform.rotation);
+        AudioManager.instance.Play(ConstantString.gameOverSound);
         isdead = true;
         mainCamera.transform.parent = null;
         deathUIPanel.gameObject.SetActive(true);

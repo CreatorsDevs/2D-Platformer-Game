@@ -10,6 +10,7 @@ public class LevelComplete : MonoBehaviour
     [SerializeField] private Button continueButton;
     [SerializeField] private Button menuButton;
     [SerializeField] private GameObject gameObjectMenu;
+    [SerializeField] private ParticleSystem levelCompleteParticleEffect = default;
     private const int lastLevelIndex = 5;
     private void Awake() 
     {
@@ -18,6 +19,8 @@ public class LevelComplete : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D other)
     {
+        Instantiate(levelCompleteParticleEffect, transform.position, levelCompleteParticleEffect.transform.rotation);
+        AudioManager.instance.Play(ConstantString.levelCompletedSound);
         if(other.gameObject.GetComponent<PlayerController>() != null)
         {            
             if(SceneManager.GetActiveScene().buildIndex == lastLevelIndex)

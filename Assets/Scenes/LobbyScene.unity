@@ -1146,7 +1146,7 @@ MonoBehaviour:
   sounds:
   - name: Background Music
     clip: {fileID: 8300000, guid: 0651b56880a11ef45909b779443691aa, type: 3}
-    volume: 1
+    volume: 0.5
     pitch: 1
     loop: 1
     source: {fileID: 0}
@@ -1157,7 +1157,7 @@ MonoBehaviour:
     loop: 0
     source: {fileID: 0}
   - name: Player Death
-    clip: {fileID: 8300000, guid: 516604db9dbf00141b71b702c4fd79c4, type: 3}
+    clip: {fileID: 8300000, guid: 3698c001a4b99aa43aa3750a1c33b979, type: 3}
     volume: 1
     pitch: 1
     loop: 0
@@ -1170,6 +1170,36 @@ MonoBehaviour:
     source: {fileID: 0}
   - name: Player Jump
     clip: {fileID: 8300000, guid: e5cb0976ee7cf93489107ede5175519b, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Level Start
+    clip: {fileID: 8300000, guid: a4dc23583fb1dc84a89049f88b06efe8, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Level Finish
+    clip: {fileID: 8300000, guid: 707ed9e4e72dc5f4da4f6d6e67e3bb7d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Game Over
+    clip: {fileID: 8300000, guid: a5406be214f159a4abfedff134037b3d, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Player Respawn
+    clip: {fileID: 8300000, guid: 8d331b50969371c4db3319a915ef2cad, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 0
+    source: {fileID: 0}
+  - name: Key Pickup
+    clip: {fileID: 8300000, guid: d76c71e98617e1c41a5cdc490eb1bee1, type: 3}
     volume: 1
     pitch: 1
     loop: 0

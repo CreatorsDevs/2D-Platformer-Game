@@ -554,6 +554,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a710bb17a0400be4ebf7c0ca2a85a98a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  LevelCompleteParticleEffect: {fileID: 2771226559820981963, guid: 7aceddc321dafe142a8d510b6154805f,
+    type: 3}
 --- !u!1 &3706120841534649610
 GameObject:
   m_ObjectHideFlags: 0

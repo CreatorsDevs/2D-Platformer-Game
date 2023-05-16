@@ -3949,3 +3949,5 @@ MonoBehaviour:
   continueButton: {fileID: 935112532}
   menuButton: {fileID: 935112531}
   gameObjectMenu: {fileID: 935112533}
+  levelCompleteParticleEffect: {fileID: 2771226559820981963, guid: 7aceddc321dafe142a8d510b6154805f,
+    type: 3}
