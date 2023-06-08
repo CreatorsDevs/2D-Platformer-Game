@@ -30,10 +30,10 @@ public class LevelComplete : MonoBehaviour
                     Debug.Log("Level Manager Instance Null");
                 else
                     LevelManager.Instance.SetCurrentLevelComplete();
-                gameObjectMenu.GetComponent<TextMeshProUGUI>().text = "You Won The Game!!!";
+                //gameObjectMenu.GetComponent<TextMeshProUGUI>().text = "You Won The Game!!!";
                 gameObjectMenu.gameObject.SetActive(true);
                 continueButton.gameObject.SetActive(false);
-                menuButton.gameObject.SetActive(true);    
+                menuButton.gameObject.SetActive(true);
             }
             else
             {

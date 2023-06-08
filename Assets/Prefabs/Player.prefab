@@ -60,7 +60,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -229,6 +229,7 @@ MonoBehaviour:
   animator: {fileID: 6144999334229668438}
   scoreController: {fileID: 0}
   speed: 7
+  jumpForce: 9
   jumpHeight: 0.2
   isGrounded: 0
   crouchedColliderScale: {x: 0.9171886, y: 1.328003}

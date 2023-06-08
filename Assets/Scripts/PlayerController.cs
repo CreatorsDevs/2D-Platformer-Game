@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public ScoreController scoreController;
     public float speed;
-    private float jumpForce;
+    [SerializeField] private float jumpForce = 5f;
     public float jumpHeight = 0.2f;
     public bool isGrounded;
     public Vector2 crouchedColliderScale = new Vector2(0.9171886f, 1.328003f);
@@ -56,10 +56,10 @@ public class PlayerController : MonoBehaviour
         }
 
         if((Input.GetKeyDown(KeyCode.LeftArrow)) ||(Input.GetKeyDown(KeyCode.RightArrow))){
-            FindObjectOfType<AudioManager>().Play(ConstantString.playerRunSound);
+            AudioManager.instance.Play(ConstantString.playerRunSound);
         }
         if(Input.GetKeyDown(KeyCode.UpArrow)){
-            FindObjectOfType<AudioManager>().Play(ConstantString.playerJumpSound);
+            AudioManager.instance.Play(ConstantString.playerJumpSound);
         }        
     }
 
@@ -89,7 +89,7 @@ public class PlayerController : MonoBehaviour
         }
         transform.localScale = scale;
 
-        if (vertical > 0 && !_isJumping)
+        if (vertical > 0 && !_isJumping && isGrounded)
         {
             //Debug.Log(vertical);
             animator.SetTrigger("Jump");
@@ -106,10 +106,12 @@ public class PlayerController : MonoBehaviour
         position.x += horizontal * speed * Time.deltaTime;
         transform.position = position;
         // Jump Movement
-        if (vertical > 0  && isGrounded)
+        if (vertical > 0  && isGrounded && Mathf.Approximately(rigidbodyPlayer.velocity.y, 0f))
         {
-            jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rigidbodyPlayer.gravityScale));
-            rigidbodyPlayer.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            //jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rigidbodyPlayer.gravityScale));
+            //rigidbodyPlayer.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            isGrounded = false;
+            rigidbodyPlayer.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
