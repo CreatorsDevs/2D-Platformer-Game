@@ -16,12 +16,6 @@ public class ScoreController : MonoBehaviour
     {
         RefreshUI();
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
     public void increaseScore(int increment){
         score += increment;
         RefreshUI();
