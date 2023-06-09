@@ -133,6 +133,7 @@ public class PlayerController : MonoBehaviour
 
     public void GetKey()
     {
+        Debug.Log("Get Key called!\n Score Controller Null: " + (scoreController != null));
         scoreController.increaseScore(10);
     }
 
