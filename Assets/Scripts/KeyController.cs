@@ -18,6 +18,7 @@ public class KeyController : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other) {
         if(other.gameObject.GetComponent<PlayerController>() != null){
+            AudioManager.instance.Play(ConstantString.keyPickUpSound);
             playerController.GetKey();
             Destroy(gameObject);
         }

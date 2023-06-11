@@ -60,7 +60,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -227,11 +227,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 6144999334229668438}
+  scoreController: {fileID: 0}
   speed: 7
-  jumpForce: 0.8
+  jumpForce: 9
+  jumpHeight: 0.2
   isGrounded: 0
   crouchedColliderScale: {x: 0.9171886, y: 1.328003}
   crouchedColliderOffset: {x: -0.11, y: 0.59}
+  levelStart: {fileID: 0}
+  mainCamera: {fileID: 0}
+  health: 3
+  hearts: []
+  deathUIPanel: {fileID: 0}
+  playerDeathParticleEffect: {fileID: 1465567302920200634, guid: e5af69f7a1c0b1f4fae7978370ffb5b0,
+    type: 3}
 --- !u!61 &887009102
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public Animator animator;
     public ScoreController scoreController;
     public float speed;
-    private float jumpForce;
+    [SerializeField] private float jumpForce = 5f;
     public float jumpHeight = 0.2f;
     public bool isGrounded;
     public Vector2 crouchedColliderScale = new Vector2(0.9171886f, 1.328003f);
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
     private bool _isJumping = false;
     private Rigidbody2D rigidbodyPlayer;   
     private bool isdead;
+    [SerializeField] private ParticleSystem playerDeathParticleEffect = default;
     
     private void Awake()
     {
@@ -52,6 +53,13 @@ public class PlayerController : MonoBehaviour
         if(transform.position.y < -20f){
             transform.position = levelStart.transform.position;
             Debug.Log("Level Restarted!");
+        }
+
+        if((Input.GetKeyDown(KeyCode.LeftArrow)) ||(Input.GetKeyDown(KeyCode.RightArrow))){
+            AudioManager.instance.Play(ConstantString.playerRunSound);
+        }
+        if(Input.GetKeyDown(KeyCode.UpArrow)){
+            AudioManager.instance.Play(ConstantString.playerJumpSound);
         }        
     }
 
@@ -81,7 +89,7 @@ public class PlayerController : MonoBehaviour
         }
         transform.localScale = scale;
 
-        if (vertical > 0 && !_isJumping)
+        if (vertical > 0 && !_isJumping && isGrounded)
         {
             //Debug.Log(vertical);
             animator.SetTrigger("Jump");
@@ -98,10 +106,12 @@ public class PlayerController : MonoBehaviour
         position.x += horizontal * speed * Time.deltaTime;
         transform.position = position;
         // Jump Movement
-        if (vertical > 0  && isGrounded)
+        if (vertical > 0  && isGrounded && Mathf.Approximately(rigidbodyPlayer.velocity.y, 0f))
         {
-            jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rigidbodyPlayer.gravityScale));
-            rigidbodyPlayer.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            //jumpForce = Mathf.Sqrt(jumpHeight * -2 * (Physics2D.gravity.y * rigidbodyPlayer.gravityScale));
+            //rigidbodyPlayer.AddForce(new Vector2(0, jumpForce), ForceMode2D.Impulse);
+            isGrounded = false;
+            rigidbodyPlayer.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
         }
     }
 
@@ -123,6 +133,7 @@ public class PlayerController : MonoBehaviour
 
     public void GetKey()
     {
+        Debug.Log("Get Key called!\n Score Controller Null: " + (scoreController != null));
         scoreController.increaseScore(10);
     }
 
@@ -132,17 +143,21 @@ public class PlayerController : MonoBehaviour
                 HandleHealthUI();
         if(health <= 0)
             {
+                AudioManager.instance.Play(ConstantString.playerDeathSound);
                 PlayDeathAnimation();
                 PlayerDeath();            
             } 
         else
             {
                 transform.position = levelStart.transform.position;
+                AudioManager.instance.Play(ConstantString.playerRespawnSound);
             }
     }
 
     public void PlayerDeath()
     {
+        Instantiate(playerDeathParticleEffect,transform.position,playerDeathParticleEffect.transform.rotation);
+        AudioManager.instance.Play(ConstantString.gameOverSound);
         isdead = true;
         mainCamera.transform.parent = null;
         deathUIPanel.gameObject.SetActive(true);

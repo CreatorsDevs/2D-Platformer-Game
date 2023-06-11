@@ -8,6 +8,16 @@ public class ScoreController : MonoBehaviour
 {
     private TextMeshProUGUI scoreText;
     private int score = 0;
+    public int Score
+    {
+        get { return score;}
+        set { score = value;}
+    }
+    private int maxScore = 30;
+    public int MAX_SCORE
+    {
+        get { return maxScore;}
+    }
     private void Awake() {
         scoreText = GetComponent<TextMeshProUGUI>();
     }
