@@ -25,7 +25,7 @@ To play the game locally, follow these steps:
 1. Clone the repository:
 
 ```shell
-git clone https://github.com/your-username/2d-platformer-game.git
+git clone https://github.com/CreatorsDevs/2D-Platformer-Game.git
 ```
 
 2. Open the project in unity.
